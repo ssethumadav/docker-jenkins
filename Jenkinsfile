@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment{
-		DOCKER_IMAGE = "kpkm25/my-jenkins-app"
+		DOCKER_IMAGE = "ssethumadav/my-jenkins-app"
 		DOCKER_CREDENTIALS_ID = "docker-creds"
 
 	}
@@ -9,7 +9,7 @@ pipeline{
         stage('Clone Repository') {
             steps {
                 echo "Cloning repository..."
-                git url: 'https://github.com/KPkm25/jenkins-docker.git', branch: 'main'
+                git url: 'https://github.com/ssethumadav/docker-jenkins.git', branch: 'main'
                 echo "Repository cloned successfully."
             }
         }
@@ -49,7 +49,7 @@ pipeline{
 withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
 sh '''
 echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-docker pull kpkm25/my-jenkins-app:latest
+docker pull ssethumadav/my-jenkins-app:latest
 '''
 
 
